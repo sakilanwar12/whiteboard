@@ -1142,7 +1142,10 @@ export default function Whiteboard() {
 
   useEffect(() => {
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = 0;
+      }
       if (toastTimer.current) clearTimeout(toastTimer.current);
     };
   }, []);

@@ -1,7 +1,26 @@
 {
-  "name": "white-board",
+  "name": "mathboard",
   "version": "0.1.0",
-  "private": true,
+  "description": "Free open-source whiteboard for math videos — pressure-sensitive pen, graph paper, shapes, laser pointer, and PNG export.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sakilanwar12/white-board.git"
+  },
+  "homepage": "https://github.com/sakilanwar12/white-board#readme",
+  "bugs": {
+    "url": "https://github.com/sakilanwar12/white-board/issues"
+  },
+  "author": "Mathboard Contributors",
+  "keywords": [
+    "whiteboard",
+    "math",
+    "education",
+    "open-source",
+    "nextjs",
+    "drawing",
+    "teaching"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
