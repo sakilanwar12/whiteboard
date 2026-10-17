@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Mathboard — Free Open-Source Whiteboard for Math Videos",
-    short_name: "Mathboard",
+    name: "Graphics Board — Free Whiteboard for Graphics-Tablet Videos",
+    short_name: "Graphics Board",
     description:
-      "Pressure-sensitive whiteboard for writing math by hand. Graph paper, shapes, laser pointer, and instant PNG export.",
+      "Pressure-sensitive whiteboard for graphics tablets. Graph paper, shapes, laser pointer, and instant PNG export.",
+    id: "/",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
@@ -16,6 +17,14 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/favicon.ico",
         sizes: "any",
         type: "image/x-icon",
+      },
+    ],
+    shortcuts: [
+      {
+        name: "Open the whiteboard",
+        short_name: "Whiteboard",
+        description: "Jump straight into the Graphics Board canvas and start drawing.",
+        url: "/app",
       },
     ],
   };

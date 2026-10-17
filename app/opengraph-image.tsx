@@ -21,11 +21,11 @@ export default function OpengraphImage() {
           fontFamily: "sans-serif",
         }}
       >
-        <div style={{ fontSize: 96, fontWeight: 800, color: "#18181b" }}>
-          Mathboard
+        <div style={{ fontSize: 88, fontWeight: 800, color: "#18181b" }}>
+          Graphics Board
         </div>
-        <div style={{ fontSize: 36, color: "#52525b", marginTop: 16 }}>
-          Free open-source whiteboard for math videos
+        <div style={{ fontSize: 34, color: "#52525b", marginTop: 16 }}>
+          Free whiteboard for graphics tablets & explainer videos
         </div>
         <div
           style={{
@@ -39,6 +39,8 @@ export default function OpengraphImage() {
           <span>Pressure-sensitive pen</span>
           <span>·</span>
           <span>Graph paper</span>
+          <span>·</span>
+          <span>Laser pointer</span>
           <span>·</span>
           <span>PNG export</span>
         </div>

@@ -25,49 +25,53 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Mathboard — Free Open-Source Whiteboard for Math Videos",
-    template: "%s | Mathboard",
+    default:
+      "Graphics Board — Free Whiteboard for Graphics Tablets & Explainer Videos",
+    template: "%s | Graphics Board",
   },
   description:
-    "Mathboard is a free, open-source whiteboard for writing math by hand. Pressure-sensitive pen, graph paper, shapes, laser pointer, infinite pan & zoom, and instant PNG export. No sign-up, works in the browser.",
+    "Graphics Board is a free, open-source whiteboard built for graphics tablets. Pressure-sensitive pen for Wacom, Huion, XP-Pen and Apple Pencil, graph paper, shapes, laser pointer, infinite canvas, and instant PNG export. Perfect for teaching by hand on camera. No sign-up.",
   keywords: [
     "whiteboard",
-    "math whiteboard",
-    "open source whiteboard",
-    "online whiteboard",
+    "graphics tablet whiteboard",
+    "pen tablet whiteboard",
+    "whiteboard for wacom",
+    "whiteboard for huion",
+    "apple pencil whiteboard",
+    "drawing tablet app",
+    "whiteboard for video recording",
+    "explainer video whiteboard",
+    "handwriting video app",
+    "online teaching whiteboard",
     "digital whiteboard",
-    "math videos",
-    "graphics tablet writing",
-    "pressure sensitive pen",
-    "graph paper whiteboard",
-    "draw math equations online",
+    "open source whiteboard",
     "free whiteboard app",
-    "excalidraw alternative",
-    "teaching whiteboard",
+    "pressure sensitive pen app",
+    "chalkboard app for youtube",
   ],
-  authors: [{ name: "Mathboard Contributors" }],
-  creator: "Mathboard",
-  publisher: "Mathboard",
+  authors: [{ name: "Graphics Board Contributors" }],
+  creator: "Graphics Board",
+  publisher: "Graphics Board",
   category: "Education",
-  classification: "Free open-source whiteboard for math teaching and videos",
-  alternates: {
-    canonical: "/",
-  },
+  classification:
+    "Free open-source whiteboard for graphics tablets and explainer videos",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Mathboard",
-    title: "Mathboard — Free Open-Source Whiteboard for Math Videos",
+    siteName: "Graphics Board",
+    title:
+      "Graphics Board — Free Whiteboard for Graphics Tablets & Explainer Videos",
     description:
-      "Write math by hand with a pressure-sensitive pen. Graph paper, shapes, laser pointer, infinite canvas, and one-click PNG export. Free, open source, no sign-up.",
+      "Pressure-sensitive ink for your Wacom, Huion, XP-Pen or Apple Pencil. Graph paper, shapes, laser pointer, infinite canvas, PNG export. Free & open source.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mathboard — Free Open-Source Whiteboard for Math Videos",
+    title:
+      "Graphics Board — Free Whiteboard for Graphics Tablets & Explainer Videos",
     description:
-      "Pressure-sensitive whiteboard for math teachers & YouTubers. Graph paper, shapes, laser pointer, PNG export. Free & open source.",
-    creator: "@mathboard",
+      "Open your pen tablet, hit record, start teaching. Free open-source whiteboard with pressure-sensitive ink, laser pointer and PNG export.",
+    creator: "@graphicsboard",
   },
   robots: {
     index: true,
@@ -98,16 +102,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: "Mathboard",
+    name: "Graphics Board",
     applicationCategory: "EducationalApplication",
     operatingSystem: "Web",
     isAccessibleForFree: true,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     description:
-      "Free, open-source whiteboard for writing math by hand with a graphics tablet. Pressure-sensitive pen, graph paper, shapes, laser pointer, and PNG export.",
+      "Free, open-source whiteboard for graphics tablets and explainer videos. Pressure-sensitive pen for Wacom, Huion, XP-Pen and Apple Pencil, graph paper, shapes, laser pointer, and PNG export.",
     url: siteUrl,
     license: "https://opensource.org/licenses/MIT",
-    author: { "@type": "Organization", name: "Mathboard Contributors" },
+    author: { "@type": "Organization", name: "Graphics Board Contributors" },
     featureList: [
       "Pressure-sensitive pen",
       "Highlighter",
@@ -117,15 +121,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       "Graph, dotted, ruled and axes backgrounds",
       "PNG export and copy to clipboard",
       "Autosave in browser",
-      "Zen mode",
+      "Zen mode for screen recording",
     ],
   };
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${patrickHand.variable} h-full antialiased`}
-    >
-      <body className="h-full overflow-hidden">
+    >        <body className="h-full">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

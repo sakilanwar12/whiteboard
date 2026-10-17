@@ -1,4 +1,4 @@
-# Mathboard — Free Open-Source Whiteboard for Math Videos
+# Graphics Board — Free Open-Source Whiteboard for Graphics Tablets & Explainer Videos
 
 > Write math by hand, like it's paper. Built for teachers, tutors, and YouTubers with a graphics tablet.
 
@@ -8,9 +8,9 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
 
-**Mathboard** is a free, open-source, pressure-sensitive whiteboard for writing math by hand in the browser. No sign-up, no tracking, no paywall — just open it and start writing.
+**Graphics Board** is a free, open-source, pressure-sensitive whiteboard built for pen tablets and explainer videos. Plug in your Wacom, Huion, XP-Pen or iPad, hit record, and start teaching — no sign-up, no tracking, no paywall.
 
-🔗 **Live demo:** https://white-board.vercel.app *(set `NEXT_PUBLIC_SITE_URL` to your domain after deploying)*
+🔗 **Live demo:** https://white-board.vercel.app → landing page, the board opens at [`/app`](https://white-board.vercel.app/app). *(set `NEXT_PUBLIC_SITE_URL` to your domain after deploying)*
 💻 **Repo:** https://github.com/sakilanwar12/white-board
 
 ---
@@ -99,6 +99,8 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com npm run build
 
 ```
 app/            → routes, SEO (layout, sitemap, robots, manifest, OG image)
+app/page.tsx    → landing page (/)
+app/app/page.tsx → the whiteboard (/app)
 components/board/ → Whiteboard, Toolbar, TopBar, ZoomBar, HelpDialog
 lib/            → geometry, drawing, types, theme
 public/         → static assets
@@ -141,6 +143,6 @@ MIT — see [LICENSE](./LICENSE). Free for personal and commercial use. Attribut
 
 ## ⭐ Support
 
-If Mathboard helps your teaching or videos, please **star the repo** — it helps others discover it.
+If Graphics Board helps your teaching or videos, please **star the repo** — it helps others discover it.
 
 Built with ❤️ for math educators, by open-source contributors.

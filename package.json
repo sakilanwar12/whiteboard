@@ -1,7 +1,7 @@
 {
-  "name": "mathboard",
+  "name": "graphics-board",
   "version": "0.1.0",
-  "description": "Free open-source whiteboard for math videos — pressure-sensitive pen, graph paper, shapes, laser pointer, and PNG export.",
+  "description": "Free open-source whiteboard for graphics tablets & explainer videos — pressure-sensitive pen, graph paper, shapes, laser pointer, and PNG export.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/sakilanwar12/white-board/issues"
   },
-  "author": "Mathboard Contributors",
+  "author": "Graphics Board Contributors",
   "keywords": [
     "whiteboard",
     "math",

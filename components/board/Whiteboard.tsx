@@ -39,7 +39,9 @@ import TopBar from "./TopBar";
 import ZoomBar from "./ZoomBar";
 import HelpDialog from "./HelpDialog";
 
-const STORAGE_KEY = "mathboard:v1";
+const STORAGE_KEY = "graphics-board:v1";
+// Boards made before the Graphics Board rename lived under this key.
+const LEGACY_STORAGE_KEY = "mathboard:v1";
 
 type Interaction =
   | { kind: "idle" }
@@ -521,7 +523,7 @@ export default function Whiteboard() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `mathboard-${timestamp()}.png`;
+      a.download = `graphics-board-${timestamp()}.png`;
       a.click();
       setTimeout(() => URL.revokeObjectURL(url), 5000);
       notify("PNG exported");
@@ -881,8 +883,9 @@ export default function Whiteboard() {
   };
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+    try {          const raw =
+            localStorage.getItem(STORAGE_KEY) ??
+            localStorage.getItem(LEGACY_STORAGE_KEY);
       if (raw) {
         const data = JSON.parse(raw) as PersistedBoard;
         if (Array.isArray(data.elements) && data.elements.length) {
