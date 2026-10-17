@@ -137,6 +137,11 @@ export default function HelpDialog({
               attention on camera.
             </li>
             <li>
+              Hit the record button in the top bar to capture your screen —
+              turn on the microphone for voice-over. The video downloads
+              automatically when you stop.
+            </li>
+            <li>
               The board autosaves in your browser, so you can pick up where you
               left off.
             </li>

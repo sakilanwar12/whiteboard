@@ -38,6 +38,8 @@ import Toolbar from "./Toolbar";
 import TopBar from "./TopBar";
 import ZoomBar from "./ZoomBar";
 import HelpDialog from "./HelpDialog";
+import RecorderPill from "./RecorderPill";
+import useScreenRecorder from "./useScreenRecorder";
 
 const STORAGE_KEY = "graphics-board:v1";
 // Boards made before the Graphics Board rename lived under this key.
@@ -153,6 +155,11 @@ export default function Whiteboard() {
     if (toastTimer.current) clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 2200);
   }, []);
+
+  const recorder = useScreenRecorder({
+    onError: notify,
+    onSaved: notify,
+  });
 
   const renderBase = useCallback(() => {
     const canvas = baseCanvasRef.current;
@@ -1300,6 +1307,12 @@ export default function Whiteboard() {
             onZen={() => setZen(true)}
             fullscreen={fullscreen}
             onFullscreen={toggleFullscreen}
+            recording={recorder.status !== "idle"}
+            recorderSupported={recorder.supported}
+            onRecordStart={(mic) => {
+              void recorder.start({ mic });
+            }}
+            onRecordStop={recorder.stop}
           />
           <ZoomBar
             zoomPct={zoomPct}
@@ -1320,6 +1333,16 @@ export default function Whiteboard() {
           <Minimize2 className="size-4" />
           Exit zen
         </button>
+      )}
+
+      {recorder.status !== "idle" && (
+        <RecorderPill
+          status={recorder.status}
+          elapsed={recorder.elapsed}
+          onPause={recorder.pause}
+          onResume={recorder.resume}
+          onStop={recorder.stop}
+        />
       )}
 
       {toast && (

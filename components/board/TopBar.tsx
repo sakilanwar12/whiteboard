@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import { useState } from "react";
 import {
   AlignJustify,
+  CircleDot,
   Copy,
   Crosshair,
   Download,
@@ -12,6 +13,8 @@ import {
   HelpCircle,
   LayoutGrid,
   Maximize2,
+  Mic,
+  MicOff,
   Redo2,
   Shrink,
   Square,
@@ -19,7 +22,7 @@ import {
   Undo2,
 } from "lucide-react";
 import type { BackgroundStyle } from "@/lib/types";
-import { IconButton, MenuItem, Popover } from "./primitives";
+import { IconButton, MenuItem, Popover, Tip } from "./primitives";
 
 type IconType = ComponentType<{ className?: string; strokeWidth?: number }>;
 
@@ -98,6 +101,10 @@ export default function TopBar({
   onZen,
   fullscreen,
   onFullscreen,
+  recording,
+  recorderSupported,
+  onRecordStart,
+  onRecordStop,
 }: {
   canUndo: boolean;
   canRedo: boolean;
@@ -112,14 +119,24 @@ export default function TopBar({
   onZen: () => void;
   fullscreen: boolean;
   onFullscreen: () => void;
+  recording: boolean;
+  recorderSupported: boolean;
+  onRecordStart: (mic: boolean) => void;
+  onRecordStop: () => void;
 }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [bgOpen, setBgOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
+  const [recordOpen, setRecordOpen] = useState(false);
+  const [mic, setMic] = useState(false);
 
   return (
     <>
-      <div className="absolute left-4 top-4 z-40 flex items-center gap-0.5 rounded-2xl border border-neutral-200 bg-white/90 p-1.5 shadow-xl shadow-neutral-900/5 backdrop-blur">
+      <div
+        className={`absolute left-4 z-40 flex items-center gap-0.5 rounded-2xl border border-neutral-200 bg-white/90 p-1.5 shadow-xl shadow-neutral-900/5 backdrop-blur transition-[top] duration-200 ${
+          recording ? "top-[68px]" : "top-4"
+        }`}
+      >
         <IconButton
           label="Undo · ⌘Z"
           onClick={onUndo}
@@ -234,6 +251,70 @@ export default function TopBar({
           >
             Copy PNG to clipboard
           </MenuItem>
+        </Popover>
+
+        {recording ? (
+          <button
+            type="button"
+            aria-label="Stop recording"
+            onClick={onRecordStop}
+            className="group relative flex size-9 cursor-pointer items-center justify-center rounded-xl bg-red-500 text-white shadow-sm transition-colors hover:bg-red-600"
+          >
+            <CircleDot className="size-[18px] animate-pulse" />
+            <Tip label="Stop recording" side="bottom" />
+          </button>
+        ) : (
+          <IconButton
+            label={
+              recorderSupported
+                ? "Record screen"
+                : "Screen recording not supported"
+            }
+            onClick={() => setRecordOpen(true)}
+            active={recordOpen}
+            disabled={!recorderSupported}
+            tipSide="bottom"
+          >
+            <CircleDot className="size-[18px]" />
+          </IconButton>
+        )}
+        <Popover
+          open={recordOpen}
+          onClose={() => setRecordOpen(false)}
+          className="right-0 top-full w-64"
+        >
+          <p className="px-2.5 py-1.5 text-sm text-neutral-700">
+            Screen recording
+          </p>
+          <MenuItem
+            active={mic}
+            onClick={() => setMic((v) => !v)}
+            icon={
+              mic ? (
+                <Mic className="size-4 text-neutral-500" />
+              ) : (
+                <MicOff className="size-4 text-neutral-500" />
+              )
+            }
+          >
+            Microphone
+          </MenuItem>
+          <p className="px-2.5 pb-1 pt-1.5 text-xs text-neutral-400">
+            Your browser will ask what to share. The video downloads when you
+            stop.
+          </p>
+          <div className="mt-1 px-1.5 pb-1">
+            <button
+              type="button"
+              onClick={() => {
+                setRecordOpen(false);
+                onRecordStart(mic);
+              }}
+              className="w-full cursor-pointer rounded-lg bg-neutral-900 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-neutral-800"
+            >
+              Start recording
+            </button>
+          </div>
         </Popover>
 
         <IconButton label="Help & shortcuts" onClick={onHelp} tipSide="bottom">

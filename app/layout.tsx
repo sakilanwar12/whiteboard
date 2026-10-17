@@ -120,6 +120,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       "Infinite pan and zoom",
       "Graph, dotted, ruled and axes backgrounds",
       "PNG export and copy to clipboard",
+      "Screen recording with microphone voice-over",
       "Autosave in browser",
       "Zen mode for screen recording",
     ],
