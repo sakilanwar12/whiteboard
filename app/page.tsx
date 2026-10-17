@@ -409,6 +409,18 @@ export default function Home() {
               GitHub
             </a>
             <Link
+              href="/about"
+              className="hidden rounded-xl px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 sm:block"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="hidden rounded-xl px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900 sm:block"
+            >
+              Contact
+            </Link>
+            <Link
               href="/app"
               className="flex cursor-pointer items-center gap-1.5 rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-700"
             >
@@ -687,6 +699,18 @@ export default function Home() {
               className="cursor-pointer transition-colors hover:text-neutral-900"
             >
               Whiteboard
+            </Link>
+            <Link
+              href="/about"
+              className="cursor-pointer transition-colors hover:text-neutral-900"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="cursor-pointer transition-colors hover:text-neutral-900"
+            >
+              Contact
             </Link>
             <a
               href={REPO_URL}
