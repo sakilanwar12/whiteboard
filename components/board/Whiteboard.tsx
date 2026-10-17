@@ -1232,6 +1232,7 @@ export default function Whiteboard() {
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
         onDoubleClick={handleDoubleClick}
+        onMouseDown={(e) => e.preventDefault()}
       />
       <div
         ref={cursorRef}
