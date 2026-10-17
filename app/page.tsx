@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowRight, Check, Pencil, Play, Star } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Download,
+  Monitor,
+  Pencil,
+  Play,
+  Star,
+} from "lucide-react";
 
 function GitHubIcon({ className }: { className?: string }) {
   return (
@@ -17,6 +25,17 @@ function GitHubIcon({ className }: { className?: string }) {
 }
 
 const REPO_URL = "https://github.com/sakilanwar12/white-board";
+
+const DESKTOP_REPO_URL = "https://github.com/sakilanwar12/graphics-board-desktop";
+const DESKTOP_DEB_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-amd64.deb`;
+const DESKTOP_APPIMAGE_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-x86_64.AppImage`;
+const DESKTOP_RELEASES_URL = `${DESKTOP_REPO_URL}/releases`;
+
+const DESKTOP_BULLETS = [
+  "Runs fully offline — no browser tab, no internet needed",
+  "Built-in recorder: screen + microphone voice-over in MP4",
+  "One-command APT install, or a portable single-file AppImage",
+];
 
 export const metadata: Metadata = {
   title: "Free Whiteboard for Graphics Tablets & Explainer Videos | Graphics Board",
@@ -540,6 +559,110 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Desktop app */}
+      <section
+        id="desktop"
+        aria-labelledby="desktop-heading"
+        className="border-y border-neutral-800 bg-neutral-900 py-20 text-white sm:py-24"
+      >
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-neutral-300">
+                <Monitor className="size-3.5 text-emerald-400" />
+                Now available for Linux
+              </p>
+              <h2
+                id="desktop-heading"
+                className="text-3xl font-bold tracking-tight sm:text-4xl"
+              >
+                Take the whiteboard offline with the desktop app
+              </h2>
+              <p className="mt-4 max-w-lg text-neutral-400">
+                Graphics Board for Ubuntu and Debian runs the full canvas
+                natively — with a built-in screen recorder that captures your
+                screen and microphone as an MP4, no browser in the way.
+              </p>
+              <ul className="mt-7 space-y-2.5">
+                {DESKTOP_BULLETS.map((b) => (
+                  <li key={b} className="flex items-start gap-2.5">
+                    <Check
+                      aria-hidden
+                      className="mt-0.5 size-4 shrink-0 text-emerald-400"
+                    />
+                    <span className="text-sm leading-relaxed text-neutral-300">
+                      {b}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href={DESKTOP_DEB_URL}
+                  className="group flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
+                >
+                  <Download className="size-4 transition-transform group-hover:translate-y-0.5" />
+                  Download .deb — Ubuntu &amp; Debian
+                </a>
+                <a
+                  href={DESKTOP_APPIMAGE_URL}
+                  className="flex items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/5"
+                >
+                  <Download className="size-4" />
+                  Portable AppImage
+                </a>
+              </div>
+              <p className="mt-4 text-xs text-neutral-500">
+                64-bit Linux · Free &amp; open source ·{" "}
+                <a
+                  href={DESKTOP_RELEASES_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-4 transition-colors hover:text-neutral-300"
+                >
+                  All releases
+                </a>
+              </p>
+            </div>
+            <div>
+              <div className="rounded-3xl border border-white/10 bg-neutral-950 p-6 shadow-2xl shadow-black/40 sm:p-8">
+                <div className="mb-5 flex items-center gap-1.5" aria-hidden>
+                  <span className="size-2.5 rounded-full bg-neutral-700" />
+                  <span className="size-2.5 rounded-full bg-neutral-700" />
+                  <span className="size-2.5 rounded-full bg-neutral-700" />
+                  <span className="ml-2 font-mono text-[11px] text-neutral-500">
+                    ~/Downloads
+                  </span>
+                </div>
+                <div className="space-y-2 overflow-x-auto font-mono text-[13px] leading-relaxed whitespace-nowrap">
+                  <p className="text-neutral-300">
+                    <span className="text-emerald-400">$</span> sudo apt install
+                    ./graphics-board-amd64.deb
+                  </p>
+                  <p className="text-neutral-500">
+                    Setting up graphics-board-desktop ...
+                  </p>
+                  <p className="text-emerald-400">
+                    ✓ Graphics Board is ready
+                  </p>
+                  <p className="pt-2 text-neutral-300">
+                    <span className="text-emerald-400">$</span>{" "}
+                    graphics-board-desktop
+                  </p>
+                  <p className="text-neutral-500">
+                    Launching whiteboard — ready to draw.
+                  </p>
+                </div>
+              </div>
+              <p className="mt-4 text-center text-xs text-neutral-500">
+                The .deb installs a launcher with icons; the AppImage runs from
+                anywhere with a single file.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How to use */}
       <section
         aria-labelledby="how-to-heading"
@@ -700,6 +823,12 @@ export default function Home() {
             >
               Whiteboard
             </Link>
+            <a
+              href="#desktop"
+              className="cursor-pointer transition-colors hover:text-neutral-900"
+            >
+              Desktop app
+            </a>
             <Link
               href="/about"
               className="cursor-pointer transition-colors hover:text-neutral-900"
