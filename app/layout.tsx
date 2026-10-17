@@ -128,12 +128,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${patrickHand.variable} h-full antialiased`}
-    >        <body className="h-full">
+    >
+      <body className="h-full">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}</body>
+        {children}
+      </body>
     </html>
   );
 }

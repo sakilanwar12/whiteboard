@@ -26,6 +26,7 @@ const ACTION_KEYS: [string, string][] = [
   ["Space", "Pan while held"],
   ["⌫", "Delete selected"],
   ["Z", "Zen mode"],
+  ["F", "Toggle fullscreen"],
   ["Esc", "Deselect / finish text"],
   ["⇧ + drag", "Constrain shapes"],
 ];

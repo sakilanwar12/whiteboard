@@ -90,6 +90,7 @@ export default function Whiteboard() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [editing, setEditing] = useState<EditingState | null>(null);
   const [zen, setZen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const [helpOpen, setHelpOpen] = useState(false);
   const [spaceHeld, setSpaceHeld] = useState(false);
   const [zoomPct, setZoomPct] = useState(100);
@@ -415,6 +416,18 @@ export default function Whiteboard() {
     commitElements([]);
     notify("Board cleared");
   }, [commitElements, notify, setSelected]);
+
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch {
+      notify("Fullscreen is not available");
+    }
+  }, [notify]);
 
   const eraseAtPoint = useCallback(
     (world: Point) => {
@@ -1110,6 +1123,10 @@ export default function Whiteboard() {
       }
       if (key === "z") {
         setZen((v) => !v);
+        return;
+      }
+      if (key === "f") {
+        toggleFullscreen();
       }
     };
 
@@ -1134,6 +1151,7 @@ export default function Whiteboard() {
     redo,
     resetView,
     setSelected,
+    toggleFullscreen,
     undo,
     zoomStep,
   ]);
@@ -1142,6 +1160,13 @@ export default function Whiteboard() {
     const dot = cursorRef.current;
     if (dot) dot.style.display = "none";
   }, [tool]);
+
+  useEffect(() => {
+    const onChange = () =>
+      setFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -1273,6 +1298,8 @@ export default function Whiteboard() {
             onCopy={copyPNG}
             onHelp={() => setHelpOpen(true)}
             onZen={() => setZen(true)}
+            fullscreen={fullscreen}
+            onFullscreen={toggleFullscreen}
           />
           <ZoomBar
             zoomPct={zoomPct}

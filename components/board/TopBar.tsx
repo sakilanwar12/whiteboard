@@ -7,11 +7,13 @@ import {
   Copy,
   Crosshair,
   Download,
+  Fullscreen,
   Grip,
   HelpCircle,
   LayoutGrid,
   Maximize2,
   Redo2,
+  Shrink,
   Square,
   Trash2,
   Undo2,
@@ -94,6 +96,8 @@ export default function TopBar({
   onCopy,
   onHelp,
   onZen,
+  fullscreen,
+  onFullscreen,
 }: {
   canUndo: boolean;
   canRedo: boolean;
@@ -106,6 +110,8 @@ export default function TopBar({
   onCopy: () => void;
   onHelp: () => void;
   onZen: () => void;
+  fullscreen: boolean;
+  onFullscreen: () => void;
 }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [bgOpen, setBgOpen] = useState(false);
@@ -236,6 +242,18 @@ export default function TopBar({
         <div className="mx-0.5 h-5 w-px bg-neutral-200" />
         <IconButton label="Zen mode · Z" onClick={onZen} tipSide="bottom">
           <Maximize2 className="size-[18px]" />
+        </IconButton>
+        <IconButton
+          label={fullscreen ? "Exit fullscreen · F" : "Fullscreen · F"}
+          onClick={onFullscreen}
+          active={fullscreen}
+          tipSide="bottom"
+        >
+          {fullscreen ? (
+            <Shrink className="size-[18px]" />
+          ) : (
+            <Fullscreen className="size-[18px]" />
+          )}
         </IconButton>
       </div>
     </>
