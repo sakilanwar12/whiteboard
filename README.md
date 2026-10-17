@@ -10,7 +10,7 @@
 
 **Graphics Board** is a free, open-source, pressure-sensitive whiteboard built for pen tablets and explainer videos. Plug in your Wacom, Huion, XP-Pen or iPad, hit record, and start teaching — no sign-up, no tracking, no paywall.
 
-🔗 **Live demo:** https://white-board.vercel.app → landing page, the board opens at [`/app`](https://white-board.vercel.app/app). *(set `NEXT_PUBLIC_SITE_URL` to your domain after deploying)*
+🔗 **Live demo:** https://graphicsboard.vercel.app → landing page, the board opens at [`/app`](https://graphicsboard.vercel.app/app). *(set `NEXT_PUBLIC_SITE_URL` to your domain after deploying)*
 💻 **Repo:** https://github.com/sakilanwar12/white-board
 
 ---
@@ -64,7 +64,7 @@ Open [http://localhost:3000](http://localhost:3000) and start writing.
 
 | Variable | Purpose | Default |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical URL used for SEO, sitemap, Open Graph | `https://white-board.vercel.app` |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URL used for SEO, sitemap, Open Graph | `https://graphicsboard.vercel.app` |
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com npm run build

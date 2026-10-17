@@ -20,7 +20,7 @@ const patrickHand = Patrick_Hand({
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://white-board.vercel.app";
+  "https://graphicsboard.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
