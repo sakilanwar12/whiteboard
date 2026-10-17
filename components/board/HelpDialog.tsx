@@ -138,7 +138,7 @@ export default function HelpDialog({
             </li>
             <li>
               Hit the record button in the top bar to capture your screen —
-              turn on the microphone for voice-over. The video downloads
+              turn on the microphone for voice-over. The MP4 video downloads
               automatically when you stop.
             </li>
             <li>

@@ -38,7 +38,7 @@
 - **Autosave to localStorage** — pick up where you left off
 - **Zen mode** (`Z`) — hides all UI for clean screen recordings
 - **PNG export** (`⌘/Ctrl+S`) + **copy to clipboard** — cropped with padding, 2x resolution
-- **Screen recording** — capture your screen (tab, window or full screen) with optional **microphone voice-over**; pause/resume while recording, and the video downloads automatically when you stop
+- **Screen recording** — capture your screen (tab, window or full screen) with optional **microphone voice-over**; pause/resume while recording, and the video downloads automatically when you stop as **MP4** (WebM fallback)
 - Full **keyboard shortcuts** — press `?` or the help icon in-app
 
 ### 🔒 Privacy

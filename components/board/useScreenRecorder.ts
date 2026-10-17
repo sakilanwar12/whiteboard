@@ -10,20 +10,24 @@ import {
 
 export type RecorderStatus = "idle" | "recording" | "paused";
 
-const MIME_CANDIDATES = [
-  "video/webm;codecs=vp9,opus",
-  "video/webm;codecs=vp8,opus",
-  "video/webm",
-  "video/mp4;codecs=h264,aac",
-  "video/mp4",
+const MIME_CANDIDATES: [withAudio: string, videoOnly: string][] = [
+  ["video/mp4;codecs=avc1,mp4a.40.2", "video/mp4;codecs=avc1"],
+  ["video/mp4;codecs=vp9,opus", "video/mp4;codecs=vp9"],
+  ["video/mp4;codecs=vp8,opus", "video/mp4;codecs=vp8"],
+  ["video/mp4", "video/mp4"],
+  ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp9"],
+  ["video/webm;codecs=vp8,opus", "video/webm;codecs=vp8"],
+  ["video/webm", "video/webm"],
 ];
 
 const VIDEO_BITRATE = 6_000_000;
 const AUDIO_BITRATE = 128_000;
 
-function pickMimeType(): string | undefined {
+function pickMimeType(hasAudio: boolean): string | undefined {
   if (typeof MediaRecorder === "undefined") return undefined;
-  return MIME_CANDIDATES.find((type) => MediaRecorder.isTypeSupported(type));
+  return MIME_CANDIDATES.map(([withAudio, videoOnly]) =>
+    hasAudio ? withAudio : videoOnly
+  ).find((type) => MediaRecorder.isTypeSupported(type));
 }
 
 function fileExtension(mime: string) {
@@ -112,13 +116,18 @@ export default function useScreenRecorder({
       onError("Recording was empty — nothing saved");
       return;
     }
+    const ext = fileExtension(type);
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `graphics-board-recording-${timestamp()}.${fileExtension(type)}`;
+    a.download = `graphics-board-recording-${timestamp()}.${ext}`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 5000);
-    onSaved("Recording saved");
+    onSaved(
+      ext === "mp4"
+        ? "Recording saved as MP4"
+        : "Saved as WebM — this browser can't record MP4"
+    );
   }, [cleanup, onError, onSaved]);
 
   const start = useCallback(
@@ -193,7 +202,7 @@ export default function useScreenRecorder({
           return;
         }
 
-        const mimeType = pickMimeType();
+        const mimeType = pickMimeType(stream.getAudioTracks().length > 0);
         mimeRef.current = mimeType ?? "video/webm";
         const options: MediaRecorderOptions = {
           videoBitsPerSecond: VIDEO_BITRATE,

@@ -300,8 +300,8 @@ export default function TopBar({
             Microphone
           </MenuItem>
           <p className="px-2.5 pb-1 pt-1.5 text-xs text-neutral-400">
-            Your browser will ask what to share. The video downloads when you
-            stop.
+            Your browser will ask what to share. The MP4 video downloads when
+            you stop.
           </p>
           <div className="mt-1 px-1.5 pb-1">
             <button
