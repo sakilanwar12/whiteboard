@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { CSSProperties, ReactNode } from "react";
+import type { ComponentType, CSSProperties, ReactNode } from "react";
 import {
+  Apple,
   ArrowRight,
   Check,
   Download,
@@ -9,6 +10,7 @@ import {
   Pencil,
   Play,
   Star,
+  Terminal,
 } from "lucide-react";
 
 function GitHubIcon({ className }: { className?: string }) {
@@ -24,17 +26,60 @@ function GitHubIcon({ className }: { className?: string }) {
   );
 }
 
+function WindowsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M0 3.449 9.75 2.1v9.451H0V3.449zm10.875-1.502L24 0v11.551H10.875V1.947zM0 12.45h9.75v9.449L0 20.551V12.45zm10.875 0H24V24l-13.125-1.949V12.45z" />
+    </svg>
+  );
+}
+
 const REPO_URL = "https://github.com/sakilanwar12/white-board";
 
 const DESKTOP_REPO_URL = "https://github.com/sakilanwar12/graphics-board-desktop";
 const DESKTOP_DEB_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-amd64.deb`;
 const DESKTOP_APPIMAGE_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-x86_64.AppImage`;
+const DESKTOP_MAC_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-mac-universal.dmg`;
+const DESKTOP_WIN_SETUP_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-win-x64-setup.exe`;
+const DESKTOP_WIN_PORTABLE_URL = `${DESKTOP_REPO_URL}/releases/latest/download/graphics-board-win-x64-portable.exe`;
 const DESKTOP_RELEASES_URL = `${DESKTOP_REPO_URL}/releases`;
 
 const DESKTOP_BULLETS = [
   "Runs fully offline — no browser tab, no internet needed",
   "Built-in recorder: screen + microphone voice-over in MP4",
-  "One-command APT install, or a portable single-file AppImage",
+  "Native installers for Linux, macOS (Apple Silicon + Intel) and Windows",
+];
+
+const DESKTOP_PLATFORMS: {
+  name: string;
+  detail: string;
+  Icon: ComponentType<{ className?: string }>;
+  links: { label: string; href: string; primary?: boolean }[];
+}[] = [
+  {
+    name: "Linux",
+    detail: "64-bit · Ubuntu, Debian & any distro",
+    Icon: Terminal,
+    links: [
+      { label: "Download .deb", href: DESKTOP_DEB_URL, primary: true },
+      { label: "AppImage", href: DESKTOP_APPIMAGE_URL },
+    ],
+  },
+  {
+    name: "macOS",
+    detail: "Universal DMG · Apple Silicon + Intel",
+    Icon: Apple,
+    links: [{ label: "Download .dmg", href: DESKTOP_MAC_URL, primary: true }],
+  },
+  {
+    name: "Windows",
+    detail: "64-bit · Windows 10 & 11",
+    Icon: WindowsIcon,
+    links: [
+      { label: "Installer (.exe)", href: DESKTOP_WIN_SETUP_URL, primary: true },
+      { label: "Portable", href: DESKTOP_WIN_PORTABLE_URL },
+    ],
+  },
 ];
 
 export const metadata: Metadata = {
@@ -54,6 +99,11 @@ export const metadata: Metadata = {
     "online teaching whiteboard",
     "open source whiteboard",
     "free whiteboard app",
+    "whiteboard desktop app",
+    "whiteboard app for mac",
+    "whiteboard app for windows",
+    "whiteboard app for linux",
+    "offline whiteboard app",
   ],
   alternates: {
     canonical: "/",
@@ -80,6 +130,10 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: "Can I record explainer videos with it?",
     a: "Yes — that's the main use case. Pair Graphics Board with OBS Studio, Zoom or any screen recorder, press Z for zen mode that hides the entire UI, and use the laser pointer to guide your viewers. Your export stays clean and ready for editing.",
+  },
+  {
+    q: "Is there a desktop app for Linux, macOS and Windows?",
+    a: "Yes — Graphics Board Desktop is a free download for Linux (.deb and portable AppImage), macOS (universal DMG for Apple Silicon and Intel) and Windows 10 & 11 (installer or portable exe). It runs fully offline and includes a built-in MP4 screen recorder with microphone voice-over.",
   },
   {
     q: "Do my drawings get uploaded anywhere?",
@@ -570,7 +624,7 @@ export default function Home() {
             <div>
               <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-neutral-300">
                 <Monitor className="size-3.5 text-emerald-400" />
-                Now available for Linux
+                Now available for Linux, macOS &amp; Windows
               </p>
               <h2
                 id="desktop-heading"
@@ -579,9 +633,10 @@ export default function Home() {
                 Take the whiteboard offline with the desktop app
               </h2>
               <p className="mt-4 max-w-lg text-neutral-400">
-                Graphics Board for Ubuntu and Debian runs the full canvas
-                natively — with a built-in screen recorder that captures your
-                screen and microphone as an MP4, no browser in the way.
+                Graphics Board Desktop runs the full canvas natively on Linux,
+                macOS and Windows — with a built-in screen recorder that
+                captures your screen and microphone as an MP4, no browser in
+                the way.
               </p>
               <ul className="mt-7 space-y-2.5">
                 {DESKTOP_BULLETS.map((b) => (
@@ -596,24 +651,48 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={DESKTOP_DEB_URL}
-                  className="group flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
-                >
-                  <Download className="size-4 transition-transform group-hover:translate-y-0.5" />
-                  Download .deb — Ubuntu &amp; Debian
-                </a>
-                <a
-                  href={DESKTOP_APPIMAGE_URL}
-                  className="flex items-center justify-center gap-2 rounded-2xl border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/5"
-                >
-                  <Download className="size-4" />
-                  Portable AppImage
-                </a>
+              <div className="mt-8 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                {DESKTOP_PLATFORMS.map((platform) => (
+                  <div
+                    key={platform.name}
+                    className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-4 sm:px-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <platform.Icon className="size-5 shrink-0 text-emerald-400" />
+                      <div>
+                        <p className="text-sm font-semibold">
+                          {platform.name}
+                        </p>
+                        <p className="text-xs text-neutral-400">
+                          {platform.detail}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {platform.links.map((link) => (
+                        <a
+                          key={link.label}
+                          href={link.href}
+                          className={
+                            link.primary
+                              ? "flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-neutral-900 transition-colors hover:bg-neutral-200"
+                              : "flex items-center gap-1.5 rounded-xl border border-white/20 px-3.5 py-2 text-xs font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/5"
+                          }
+                        >
+                          <Download className="size-3.5" />
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
               <p className="mt-4 text-xs text-neutral-500">
-                64-bit Linux · Free &amp; open source ·{" "}
+                First launch (unsigned builds): macOS right-click → Open ·
+                Windows “More info → Run anyway”.
+              </p>
+              <p className="mt-1.5 text-xs text-neutral-500">
+                Free &amp; open source ·{" "}
                 <a
                   href={DESKTOP_RELEASES_URL}
                   target="_blank"
@@ -655,8 +734,10 @@ export default function Home() {
                 </div>
               </div>
               <p className="mt-4 text-center text-xs text-neutral-500">
-                The .deb installs a launcher with icons; the AppImage runs from
-                anywhere with a single file.
+                On Linux the .deb adds a launcher with icons and the AppImage
+                runs from a single file. On macOS, drag the app into
+                Applications; on Windows, run the installer — or skip setup
+                with the portable exe.
               </p>
             </div>
           </div>
